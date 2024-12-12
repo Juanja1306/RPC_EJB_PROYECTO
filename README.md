@@ -10,7 +10,7 @@ El proyecto está dividido en dos componentes principales: el cliente y el servi
 ### Cliente
 - **Main**: El directorio Main incluye Main.java, que actúa como el punto de entrada de la aplicación cliente. Este archivo inicializa la configuración del cliente y establece la conexión inicial con el servidor.
 - **Model**: Este directorio alberga la definición de entidades, como Usuario.java, que mapea la estructura de datos de los usuarios que la aplicación gestionará. Esto incluye atributos como nombre, identificador, y permisos.
-- **Service**: Incluye ServicioUsuarioRemoto.java, que es una interfaz para definir los servicios que el cliente puede invocar de manera remota en el servidor. Estos servicios incluyen operaciones como crear, actualizar, y eliminar usuarios.
+- **Service**: Incluye ServicioUsuarioRemoto.java, que es una interfaz para definir los servicios que el cliente puede invocar de manera remota en el servidor. Estos servicios incluyen operaciones como crear y listar usuarios.
 
 ### Servidor
 - **Controller**:Controlador.java en este directorio centraliza la lógica de negocio, actuando como el mediador entre la interfaz de usuario del cliente y el manejo de datos en el servidor. Controla las transacciones y asegura que los datos del usuario se manejen de manera segura y eficiente.
