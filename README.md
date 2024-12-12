@@ -13,7 +13,7 @@ El proyecto está dividido en dos componentes principales: el cliente y el servi
 - **Service**: Incluye ServicioUsuarioRemoto.java, que es una interfaz para definir los servicios que el cliente puede invocar de manera remota en el servidor. Estos servicios incluyen operaciones como crear y listar usuarios.
 
 ### Servidor
-- **Controller**:Controlador.java en este directorio centraliza la lógica de negocio, actuando como el mediador entre la interfaz de usuario del cliente y el manejo de datos en el servidor. Controla las transacciones y asegura que los datos del usuario se manejen de manera segura y eficiente.
+- **Controller**: Controlador.java en este directorio centraliza la lógica de negocio, actuando como el mediador entre la interfaz de usuario del cliente y el manejo de datos en el servidor. Controla las transacciones y asegura que los datos del usuario se manejen de manera segura y eficiente.
 - **Model**: También contiene Usuario.java, asegurando una representación consistente de la entidad usuario en todo el proyecto, facilitando la integración entre cliente y servidor.
 - **Service**: Compuesto por ServicioUsuario.java, ServicioUsuarioLocal.java, y ServicioUsuarioRemoto.java, este directorio define las interfaces y clases que implementan los servicios ofrecidos por el servidor. ServicioUsuario.java y ServicioUsuarioLocal.java son utilizados internamente en el servidor, mientras que ServicioUsuarioRemoto.java facilita la interacción con el cliente.
 
