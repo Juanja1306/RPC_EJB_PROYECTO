@@ -1,5 +1,5 @@
 
-# Proyecto Java Cliente-Servidor
+# Proyecto Java Cliente-Servidor con RPC y EJB
 
 ## Descripción
 Este proyecto consiste en una aplicación distribuida usando la arquitectura Cliente-Servidor, implementada en Java. La aplicación permite la gestión de usuarios mediante una interfaz de cliente que se comunica con un servidor que maneja la lógica de negocio y el acceso a datos. Todo esto mediante RPC (Remote Procedure Call - Llamada a Procedimiento Remoto). Es un protocolo que permite al programa ejecutar un procedimiento o método en un espacio de direcciones diferente, que puede estar en otro ordenador. En esencia, facilita la comunicación entre procesos distribuidos en diferentes sistemas operativos y hardware
