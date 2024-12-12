@@ -84,6 +84,7 @@ public class Main {
         frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         frame.setVisible(true);
+        frame.setResizable(false);
     }
 
     public void inicializar() throws Exception {
@@ -139,12 +140,18 @@ public class Main {
     public void listar() throws Exception {
     	textArea.setText("");
         usuarios = UsuarioRemoto.listarUsuarios();
-        textArea.append("Listado de Usuarios:\n");
-        for (Usuario usuario : usuarios) {
-            textArea.append("Cedula: " + usuario.getCedula() + ", Nombre: " + usuario.getNombre() + 
-                            ", Correo: " + usuario.getCorreo() + ", Celular: " + usuario.getCelular() +
-                            ", Auto: " + usuario.getAuto() + ", Sangre: " + usuario.getSangre() + "\n");
+        
+        if(usuarios.isEmpty()) {
+        	textArea.append("No hay registros de Usuarios:\n");
+        }else {
+        	for (Usuario usuario : usuarios) {
+        		textArea.append("Listado de Usuarios:\n");
+                textArea.append("Cedula: " + usuario.getCedula() + ", Nombre: " + usuario.getNombre() + 
+                                ", Correo: " + usuario.getCorreo() + ", Celular: " + usuario.getCelular() +
+                                ", Auto: " + usuario.getAuto() + ", Sangre: " + usuario.getSangre() + "\n");
+            }
         }
+        
     }
 
     public static void main(String[] args) {
