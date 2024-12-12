@@ -1,50 +1,73 @@
 package main;
 
+
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
-import model.Member;
-import service.MemberRegistrationRemote;
+import model.Usuario;
+import service.ServicioUsuarioRemoto;
 
 public class Main {
-    private MemberRegistrationRemote memberRegistration;
 
-    public void initialize() throws Exception {
-        Hashtable<String, Object> jndiProps = new Hashtable<>();
-        jndiProps.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
-        jndiProps.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+	private ServicioUsuarioRemoto UsuarioRemoto;
+	private List<Usuario> usuarios;
 
-        try {
-            Context context = new InitialContext(jndiProps);
-            memberRegistration = (MemberRegistrationRemote) context.lookup(
-                "ejb:/Server/MemberRegistration!service.MemberRegistrationRemote"
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error JNDI lookup. ");
-            throw e;
-        }
-    }
+	public void inicializar() throws Exception {
+		Hashtable<String, Object> jndiProperties = new Hashtable<String, Object>();
+		jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.wildfly.naming.client.WildFlyInitialContextFactory");
+		jndiProperties.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+		
+		try {
+			Context context = new InitialContext(jndiProperties);
+			UsuarioRemoto = (ServicioUsuarioRemoto) context
+					.lookup("ejb:/Server/ServicioUsuario!service.ServicioUsuarioRemoto");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+		}
+	}
+	
+	public void registrarUser(String cedula, String nombre, String correo, String celular, String auto, String sangre) throws Exception{
+		Usuario usuario = new Usuario();
+		usuario.setCedula(cedula);
+		usuario.setNombre(nombre);
+		usuario.setCorreo(correo);
+		usuario.setCelular(celular);
+		usuario.setAuto(auto);
+		usuario.setSangre(sangre);
+		
+		UsuarioRemoto.crearUsuario(usuario);
+		System.out.println("Usuario creado con exito");
+	}
+	
+	public void listar() throws Exception{
+		usuarios = UsuarioRemoto.listarUsuarios();
+		
+		for(Usuario usuario : usuarios) {
+			System.out.println(usuario.getCedula());
+			System.out.println(usuario.getNombre());
+			System.out.println(usuario.getCorreo());
+			System.out.println(usuario.getCelular());
+			System.out.println(usuario.getAuto());
+			System.out.println(usuario.getSangre());
+		}
+	}
+	
+	public static void main(String[] args) {
+		try {
+			Main main = new Main();
+			main.inicializar();
+			main.registrarUser("0104435567", "Juan Malo", "Juanja@gmail.com", "0989776543", "Mercedes", "A-");
+			System.out.println("------------------------------------------------------------------------------------------------");
+			main.listar();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.toString());
+		}
+	}
 
-    public void registerMember(String name, String email, String phone) throws Exception {
-        Member member = new Member();
-        member.setName(name);
-        member.setEmail(email);
-        member.setPhoneNumber(phone);
-
-        memberRegistration.register(member);
-        System.out.println("Member registered: " + name);
-    }
-
-    public static void main(String[] args) {
-        try {
-            Main client = new Main();
-            client.initialize();
-            client.registerMember("Juan", "Jan@example.com", "0989765438");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
