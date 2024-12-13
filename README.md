@@ -45,3 +45,6 @@ La comunicación entre la interfaz de usuario y el servidor se maneja mediante l
 ### Cliente
 1. Navega al directorio del cliente.
 2. Compila el archivo Main.java
+
+## Video Youtube
+### https://youtu.be/OxWMqpqqL9c
